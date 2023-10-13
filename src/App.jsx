@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import './App.css';
+
+const FoodList = lazy(() => import('./FoodList'));
 
 function App() {
   const [foodList, setFoodList] = useState([
@@ -40,13 +42,9 @@ function App() {
         <button type="submit">Add Food</button>
       </form>
 
-      <ul>
-        {foodList.map((food, index) => (
-          <li key={index}>
-            <strong>{food.name}:</strong> {food.ingredients.join(', ')}
-          </li>
-        ))}
-      </ul>
+      <Suspense fallback={<div>Loading...</div>}>
+        <FoodList foodList={foodList} />
+      </Suspense>
     </div>
   );
 }
