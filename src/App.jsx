@@ -24,7 +24,10 @@ function App() {
 
   return (
     <div>
-      <form onSubmit={handleFoodSubmit}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <FoodList foodList={foodList} />
+      </Suspense>
+      <form onSubmit={handleFoodSubmit} className='flex flex-col gap-4 md:w-[50%] md:m-auto p-[30px]'>
         <input
           type="text"
           placeholder="Enter Food Name"
@@ -39,12 +42,10 @@ function App() {
           onChange={(e) => setNewIngredients(e.target.value)}
           className="border-2 p-2"
         />
-        <button type="submit">Add Food</button>
+        <button type="submit" className='bg-blue-600 text-white w-fit p-[10px] m-auto rounded-lg'>Add Food</button>
       </form>
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <FoodList foodList={foodList} />
-      </Suspense>
+      
     </div>
   );
 }
