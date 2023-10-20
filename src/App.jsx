@@ -23,11 +23,23 @@ function App() {
   };
 
   return (
-    <div>
+    <div className='bg-slate-400 h-screen'>
+      
+      <nav className='text-white text-2xl border-black border-b-2 pb-5 md:w-[80%] m-auto'>
+        <ul className='flex p-[10px] justify-between font-semibold font-mono '>
+          <li>Book Store</li>
+          <li>For Business</li>
+          <li>Login</li>
+        </ul>
+      </nav>
+      <div className='p-[50px] border-black border-b-2'>
+        <h1 className='text-[3rem] font-mono text-center text-white'>Cooking With Love</h1>
+      </div>
+      <div className='sm:flex'>
       <Suspense fallback={<div>Loading...</div>}>
         <FoodList foodList={foodList} />
       </Suspense>
-      <form onSubmit={handleFoodSubmit} className='flex flex-col gap-4 md:w-[50%] md:m-auto p-[30px]'>
+      <form onSubmit={handleFoodSubmit} className=' flex flex-col gap-4 sm:w-[100%] md:m-auto p-[30px]'>
         <input
           type="text"
           placeholder="Enter Food Name"
@@ -35,17 +47,20 @@ function App() {
           onChange={(e) => setNewFood(e.target.value)}
           className="border-2 p-2"
         />
+        <div className='flex'>
         <input
           type="text"
           placeholder="Enter Ingredients (comma-separated)"
           value={newIngredients}
           onChange={(e) => setNewIngredients(e.target.value)}
-          className="border-2 p-2"
+          className="border-2 p-2 w-[80%]"
         />
+        <button className='w-[20%] bg-black text-white'>Add More</button>
+        </div>
+        <input type='text' placeholder='how to cook' className='border-2 p-2'/>
         <button type="submit" className='bg-blue-600 text-white w-fit p-[10px] m-auto rounded-lg'>Add Food</button>
       </form>
-
-      
+      </div>
     </div>
   );
 }
