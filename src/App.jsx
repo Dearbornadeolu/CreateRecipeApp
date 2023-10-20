@@ -16,7 +16,7 @@ function App() {
     if (newFood.trim() === '' || newIngredients.trim() === '') {
       return;
     }
-  
+
     const foodItem = { name: newFood, ingredients: [...newIngredients.split(', '), ...additionalIngredients] };
     setFoodList([...foodList, foodItem]);
     setNewFood('');
@@ -84,7 +84,10 @@ function App() {
               </div>
             ))}
           </div>
-          <input type='text' placeholder='how to cook' className='border-2 p-2' />
+          <div className='flex'>
+            <input type='text' placeholder='how to cook' className='border-2 p-2 w-[80%]' />
+            <button className='bg-black text-white w-[20%]'>Add Stages</button>
+          </div>
           <button type="submit" className='bg-blue-600 text-white w-fit p-[10px] m-auto rounded-lg'>
             Add Food
           </button>
