@@ -1,5 +1,3 @@
-
-
 function FoodList({ foodList }) {
   return (
     <div>
@@ -8,6 +6,16 @@ function FoodList({ foodList }) {
         {foodList.map((food, index) => (
           <li key={index} className="bg-slate-300 mb-3 p-[4px]">
             <strong>{food.name}:</strong> {food.ingredients.join(', ')}
+            {food.cookingStages.length > 0 && (
+              <div>
+                <strong>Cooking Stages:</strong>
+                <ul>
+                  {food.cookingStages.map((stage, stageIndex) => (
+                    <li key={stageIndex}>{stage}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </li>
         ))}
       </ul>

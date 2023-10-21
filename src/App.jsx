@@ -5,11 +5,13 @@ const FoodList = lazy(() => import('./FoodList'));
 
 function App() {
   const [foodList, setFoodList] = useState([
-    { name: 'Pizza', ingredients: ['Dough', 'Tomato Sauce', 'Cheese', 'Pepperoni'] },
+    { name: 'Pizza', ingredients: ['Dough', 'Tomato Sauce', 'Cheese', 'Pepperoni'], cookingStages: [] },
   ]);
   const [newFood, setNewFood] = useState('');
   const [newIngredients, setNewIngredients] = useState('');
   const [additionalIngredients, setAdditionalIngredients] = useState([]);
+  const [currentStage, setCurrentStage] = useState('');
+  const [cookingStages, setCookingStages] = useState([]);
 
   const handleFoodSubmit = (e) => {
     e.preventDefault();
@@ -17,11 +19,17 @@ function App() {
       return;
     }
 
-    const foodItem = { name: newFood, ingredients: [...newIngredients.split(', '), ...additionalIngredients] };
+    const foodItem = {
+      name: newFood,
+      ingredients: [...newIngredients.split(', '), ...additionalIngredients],
+      cookingStages: cookingStages.slice(), // Copy cooking stages
+    };
+
     setFoodList([...foodList, foodItem]);
     setNewFood('');
     setNewIngredients('');
-    setAdditionalIngredients([]); // Reset additional ingredients
+    setAdditionalIngredients([]);
+    setCookingStages([]); // Reset cooking stages
   };
 
   const handleAddMore = () => {
@@ -31,23 +39,53 @@ function App() {
     }
   };
 
+  const handleAddStage = () => {
+    if (currentStage.trim() !== '') {
+      setCookingStages([...cookingStages, currentStage]);
+      setCurrentStage('');
+    }
+  };
+
+  const renderCookingStagesInputs = () => {
+    return cookingStages.map((stage, index) => (
+      <div key={index}>
+        <input
+          type="text"
+          placeholder={`Cooking Stage ${index + 1}`}
+          value={stage}
+          onChange={(e) => {
+            const updatedStages = [...cookingStages];
+            updatedStages[index] = e.target.value;
+            setCookingStages(updatedStages);
+          }}
+          className="border-2 p-2 w-[80%]"
+        />
+      </div>
+    ));
+  };
+
+  const renderAdditionalStageInput = () => {
+    return (
+      <div>
+        <input
+          type="text"
+          placeholder={`Cooking Stage ${cookingStages.length + 1}`}
+          value={currentStage}
+          onChange={(e) => setCurrentStage(e.target.value)}
+          className="border-2 p-2 w-[80%]"
+        />
+      </div>
+    );
+  };
+
   return (
     <div className='bg-slate-400 h-screen'>
-      <nav className='text-white text-2xl border-black border-b-2 pb-5 md:w-[80%] m-auto'>
-        <ul className='flex p-[10px] justify-between font-semibold font-mono '>
-          <li>Book Store</li>
-          <li>For Business</li>
-          <li>Login</li>
-        </ul>
-      </nav>
-      <div className='p-[50px] border-black border-b-2'>
-        <h1 className='text-[3rem] font-mono text-center text-white'>Cooking With Love</h1>
-      </div>
+      {/* ...your navigation and header code... */}
       <div className='sm:flex'>
         <Suspense fallback={<div>Loading...</div>}>
           <FoodList foodList={foodList} />
         </Suspense>
-        <form onSubmit={handleFoodSubmit} className=' flex flex-col gap-4 sm:w-[100%] md:m-auto p-[30px]'>
+        <form onSubmit={handleFoodSubmit} className='flex flex-col gap-4 sm:w-[100%] md:m-auto p-[30px]'>
           <input
             type="text"
             placeholder="Enter Food Name"
@@ -85,9 +123,18 @@ function App() {
             ))}
           </div>
           <div className='flex'>
-            <input type='text' placeholder='how to cook' className='border-2 p-2 w-[80%]' />
-            <button className='bg-black text-white w-[20%]'>Add Stages</button>
+            <input
+              type='text'
+              placeholder='How to cook'
+              value={currentStage}
+              onChange={(e) => setCurrentStage(e.target.value)}
+              className='border-2 p-2 w-[80%]'
+            />
+            <button type='button' onClick={handleAddStage} className='bg-black text-white w-[20%]'>
+              Add Stage
+            </button>
           </div>
+          {renderCookingStagesInputs()} {/* Render the added cooking stages inputs */}
           <button type="submit" className='bg-blue-600 text-white w-fit p-[10px] m-auto rounded-lg'>
             Add Food
           </button>
