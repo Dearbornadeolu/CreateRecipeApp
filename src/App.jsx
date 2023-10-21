@@ -80,7 +80,13 @@ function App() {
 
   return (
     <div className='bg-slate-400 h-screen'>
-      {/* ...your navigation and header code... */}
+      <nav className='text-white text-2xl border-black border-b-2 pb-5 md:w-[80%] m-auto'>
+        <ul className='flex p-[10px] justify-between font-semibold font-mono '>
+          <li>Book Store</li>
+          <li>For Business</li>
+          <li>Login</li>
+        </ul>
+      </nav>
       <div className='sm:flex'>
         <Suspense fallback={<div>Loading...</div>}>
           <FoodList foodList={foodList} />
