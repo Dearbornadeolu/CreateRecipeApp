@@ -64,19 +64,19 @@ function App() {
     ));
   };
 
-  const renderAdditionalStageInput = () => {
-    return (
-      <div>
-        <input
-          type="text"
-          placeholder={`Cooking Stage ${cookingStages.length + 1}`}
-          value={currentStage}
-          onChange={(e) => setCurrentStage(e.target.value)}
-          className="border-2 p-2 w-[80%]"
-        />
-      </div>
-    );
-  };
+  // const renderAdditionalStageInput = () => {
+  //   return (
+  //     <div>
+  //       <input
+  //         type="text"
+  //         placeholder={`Cooking Stage ${cookingStages.length + 1}`}
+  //         value={currentStage}
+  //         onChange={(e) => setCurrentStage(e.target.value)}
+  //         className="border-2 p-2 w-[80%]"
+  //       />
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className='bg-slate-400 h-screen'>
