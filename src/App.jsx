@@ -80,14 +80,18 @@ function App() {
 
   return (
     <div className='bg-slate-400 h-screen'>
-      <nav className='text-white text-2xl border-black border-b-2 pb-5 md:w-[80%] m-auto'>
-        <ul className='flex p-[10px] justify-between font-semibold font-mono '>
+     <div className='bg-[url("/img1.jpg")] bg-cover bg-no-repeat bg-blend-darken'>
+     <nav className='text-white text-2xl border-purple-600 border-b-2 pb-5 md:w-[80%] m-auto'>
+        <ul className='flex p-[10px] justify-between font-semibold font-mono text-purple-200'>
           <li>Book Store</li>
           <li>For Business</li>
           <li>Login</li>
         </ul>
       </nav>
-      <img src="/img1.jpg" alt="" className='w-[100%]'/>
+      <div  className='h-[300px] flex justify-center align-middle items-center'>
+        <h1 className='text-[3.5rem] text-white font-extrabold text-center lg:w-[50%] lg:m-auto'>Welcome to your <span className='text-purple-700'>Recipe</span> Book</h1>
+      </div>
+     </div>
       <div className='sm:flex'>
         <Suspense fallback={<div>Loading...</div>}>
           <FoodList foodList={foodList} />
