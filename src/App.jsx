@@ -5,7 +5,7 @@ const FoodList = lazy(() => import('./FoodList'));
 
 function App() {
   const [foodList, setFoodList] = useState([
-    { name: 'Pizza', ingredients: ['Dough', 'Tomato Sauce', 'Cheese', 'Pepperoni'], cookingStages: [] },
+    { name: 'Pizza', ingredients: ['Dough', 'Tomato Sauce', 'Cheese', 'Pepperoni'], cookingStages: ['beans', 'sleep'] },
   ]);
   const [newFood, setNewFood] = useState('');
   const [newIngredients, setNewIngredients] = useState('');
@@ -64,19 +64,19 @@ function App() {
     ));
   };
 
-  // const renderAdditionalStageInput = () => {
-  //   return (
-  //     <div>
-  //       <input
-  //         type="text"
-  //         placeholder={`Cooking Stage ${cookingStages.length + 1}`}
-  //         value={currentStage}
-  //         onChange={(e) => setCurrentStage(e.target.value)}
-  //         className="border-2 p-2 w-[80%]"
-  //       />
-  //     </div>
-  //   );
-  // };
+  const renderAdditionalStageInput = () => {
+    return (
+      <div>
+        <input
+          type="text"
+          placeholder={`Cooking Stage ${cookingStages.length + 1}`}
+          value={currentStage}
+          onChange={(e) => setCurrentStage(e.target.value)}
+          className="border-2 p-2 w-[80%]"
+        />
+      </div>
+    );
+  };
 
   return (
     <div className='bg-slate-400 h-screen'>
@@ -87,6 +87,7 @@ function App() {
           <li>Login</li>
         </ul>
       </nav>
+      <img src="/img1.jpg" alt="" className='w-[100%]'/>
       <div className='sm:flex'>
         <Suspense fallback={<div>Loading...</div>}>
           <FoodList foodList={foodList} />
